@@ -6,6 +6,9 @@ The Marketing Performance Reporter follows an ELT (Extract, Load, Transform) arc
 
 ### High-Level Architecture
 
+![High-Level System Architecture](./images/high-level-system-architecture.png)
+*Figure 1: System architecture showing data flow from marketing platforms through ingestion, transformation, and delivery layers*
+
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                          Data Sources Layer                              │
@@ -334,7 +337,7 @@ transformations/
 
 5. **Template Renderer**: Uses Jinja2 to format the final briefing message:
    ```jinja2
-   📊 Daily Marketing Briefing for {{ client_name }}
+   Daily Marketing Briefing for {{ client_name }}
    Data as of {{ timestamp }} (UTC)
    
    Last 7 Days vs. Previous 7 Days:
@@ -351,10 +354,10 @@ transformations/
       • CPA: ${{ channel.cpa }} {{ channel.cpa_trend }}
    {% endfor %}
    
-   💡 {{ narrative }}
+   {{ narrative }}
    
    {% if anomalies %}
-   ⚠️  Anomalies Detected:
+   Anomalies Detected:
    {% for anomaly in anomalies %}
    • {{ anomaly.message }}
    {% endfor %}
@@ -385,6 +388,11 @@ briefing/
 │   └── narrative.py
 └── main.py
 ```
+
+**Comparison Flow**:
+
+![Comparison Flow Diagram](./images/comparison-flow-diagram.png)
+*Figure 2: Flow showing how 7-day periods are compared and trend indicators are calculated*
 
 ### 2.6 Delivery Layer
 
@@ -545,6 +553,11 @@ clients:
       teams:
         enabled: false
 ```
+
+**Multi-Tenant Architecture**:
+
+![Multi-Tenant Architecture](./images/multi-tenant-architecture.png)
+*Figure 3: Multi-tenant architecture showing how the system handles multiple clients with different configurations, channels, and delivery preferences*
 
 ### 4.2 Environment Variables
 

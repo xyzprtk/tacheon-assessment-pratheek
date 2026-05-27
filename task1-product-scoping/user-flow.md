@@ -83,6 +83,11 @@ An analyst starts their workday and needs to understand how marketing is perform
 └─────────────────────────────────────────────────────────────┘
 ```
 
+**Visual Flow Diagram**:
+
+![Analyst Daily Workflow Flow](./images/user-flow-diagram.png)
+*Figure 1: Complete analyst daily workflow from opening Slack to using insights in client meetings*
+
 ### Time Saved
 - **Before**: 30-60 minutes of manual data pulling
 - **After**: 5 minutes to review briefing + 10-15 minutes if investigating anomalies
@@ -262,7 +267,7 @@ The Meta API was down during the 6:00 AM ingestion window. The analyst needs to 
 │  1. At 9:00 AM, analyst opens Slack                         │
 │     Briefing shows:                                         │
 │                                                             │
-│  ⚠️  Incomplete Data:                                       │
+│     Incomplete Data:                                        │
 │     Meta data is unavailable (API error at 6:15 AM UTC)     │
 │     Retry scheduled for 10:00 AM UTC                        │
 │                                                             │
@@ -286,7 +291,7 @@ The Meta API was down during the 6:00 AM ingestion window. The analyst needs to 
 │  3. Analyst checks #marketing-reporter-ops Slack channel    │
 │     Sees alert:                                             │
 │                                                             │
-│  🔴 Alert: Meta API Ingestion Failed                        │
+│     Alert: Meta API Ingestion Failed                        │
 │     Client: acme_corp                                       │
 │     Error: 503 Service Unavailable                          │
 │     Retry 1: Failed at 6:16 AM                              │
@@ -309,7 +314,7 @@ The Meta API was down during the 6:00 AM ingestion window. The analyst needs to 
 ┌─────────────────────────────────────────────────────────────┐
 │  5. At 10:15 AM, analyst receives Slack notification:       │
 │                                                             │
-│  ✅ Meta API Ingestion Successful                           │
+│     Meta API Ingestion Successful                           │
 │     Client: acme_corp                                       │
 │     Data as of: 2024-01-15 10:10 AM UTC                     │
 │     Briefing updated with complete data                     │
@@ -323,6 +328,11 @@ The Meta API was down during the 6:00 AM ingestion window. The analyst needs to 
 │     - No manual work required                               │
 └─────────────────────────────────────────────────────────────┘
 ```
+
+**Visual Flow Diagram**:
+
+![Error Handling Flow](./images/error-handling-flow.png)
+*Figure 2: Flow showing how incomplete data is handled gracefully with retries and transparent communication*
 
 ### Key Benefit
 - Analyst knows when data is incomplete (no false zeros)
