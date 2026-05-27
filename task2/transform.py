@@ -106,7 +106,7 @@ def add_derived_fields(df: pd.DataFrame) -> pd.DataFrame:
     
     if "price_change_percentage_24h" in df_derived.columns:
         df_derived["volatility_flag"] = (
-            df_derived["price_change_percentage_24h"].abs() > config.volatility_threshold
+            (df_derived["price_change_percentage_24h"] / 100).abs() > config.volatility_threshold
         )
         logger.info(
             f"Added volatility_flag (threshold: {config.volatility_threshold})",
