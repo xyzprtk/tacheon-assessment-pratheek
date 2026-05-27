@@ -152,7 +152,8 @@ def load_to_bigquery(df: pd.DataFrame, target_date: date) -> None:
         time_partitioning=bigquery.TimePartitioning(
             type_=bigquery.TimePartitioningType.DAY,
             field="snapshot_date"
-        )
+        ),
+        clustering_fields=["id", "market_cap_tier"]
     )
     
     partition_decorator = f"{config.bq_full_table_id}${target_date.strftime('%Y%m%d')}"
