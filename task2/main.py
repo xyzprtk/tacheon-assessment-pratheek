@@ -25,7 +25,7 @@ def run_pipeline() -> None:
     logger.info("Pipeline started", extra={"event": "pipeline_start"})
     
     try:
-        logger.info("Step 1: Extracting data from CoinGecko API")
+        logger.info("Step 1: Extracting data from CoinGecko API", extra={"event": "extract_start"})
         raw_data = fetch_all_pages()
         
         if not raw_data:
@@ -35,7 +35,7 @@ def run_pipeline() -> None:
             )
             sys.exit(0)
         
-        logger.info("Step 2: Transforming data")
+        logger.info("Step 2: Transforming data", extra={"event": "transform_start"})
         df_transformed = transform(raw_data)
         
         if df_transformed.empty:
@@ -45,7 +45,7 @@ def run_pipeline() -> None:
             )
             sys.exit(0)
         
-        logger.info("Step 3: Loading data to BigQuery")
+        logger.info("Step 3: Loading data to BigQuery", extra={"event": "load_start"})
         target_date = date.today()
         load_to_bigquery(df_transformed, target_date)
         

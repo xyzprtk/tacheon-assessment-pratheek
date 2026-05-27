@@ -81,6 +81,7 @@ def get_bigquery_client() -> bigquery.Client:
 def ensure_table_exists(client: bigquery.Client) -> None:
     """
     Create the BigQuery table with partitioning if it doesn't exist.
+    If table exists but isn't partitioned, delete and recreate it.
     
     Args:
         client: BigQuery client instance
@@ -88,7 +89,17 @@ def ensure_table_exists(client: bigquery.Client) -> None:
     table_id = config.bq_full_table_id
     
     try:
-        client.get_table(table_id)
+        table = client.get_table(table_id)
+        
+        # Check if table is partitioned
+        if table.time_partitioning is None:
+            logger.warning(
+                f"Table {table_id} exists but is not partitioned. Deleting and recreating.",
+                extra={"event": "bq_table_not_partitioned", "table": table_id}
+            )
+            client.delete_table(table_id)
+            raise Exception("Table not partitioned, recreating")
+        
         logger.info(
             f"Table already exists: {table_id}",
             extra={"event": "bq_table_exists", "table": table_id}
