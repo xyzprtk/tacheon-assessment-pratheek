@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task 1 - Marketing Performance Reporter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #0a0a0a;
+    --text-secondary: #444444;
+    --border: #e2e2e2;
+    --surface: #f7f7f7;
+  }
+  html.dark {
+    --bg: #0a0a0a;
+    --text: #f2f2f2;
+    --text-secondary: #999999;
+    --border: #222222;
+    --surface: #111111;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Geist', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  header {
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 1.25rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+  .logo {
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+  }
+  .theme-toggle {
+    background: none;
+    border: 1px solid var(--border);
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 0.375rem;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s ease;
+  }
+  .theme-toggle:hover { border-color: var(--text-secondary); }
+  .theme-toggle svg { width: 20px; height: 20px; }
+  main {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 5rem 2rem 6rem;
+  }
+  h1 {
+    font-size: 2.75rem;
+    font-weight: 600;
+    line-height: 1.05;
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.03em;
+  }
+  .subtitle {
+    color: var(--text-secondary);
+    font-size: 1.125rem;
+    margin-bottom: 4rem;
+    font-weight: 400;
+  }
+  section { margin-bottom: 4rem; }
+  h2 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+  }
+  p {
+    margin-bottom: 1.15rem;
+    color: var(--text-secondary);
+    font-size: 1rem;
+  }
+  p strong { color: var(--text); font-weight: 500; }
+  ul {
+    margin-left: 1.25rem;
+    margin-bottom: 1.15rem;
+    color: var(--text-secondary);
+  }
+  li { margin-bottom: 0.6rem; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+  .card p:last-child { margin-bottom: 0; }
+  code {
+    font-family: 'Geist', monospace;
+    font-size: 0.875em;
+    background: var(--surface);
+    padding: 0.15rem 0.4rem;
+    border-radius: 0.25rem;
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+  .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+  .cols .card { margin-bottom: 0; }
+  @media (max-width: 600px) {
+    .cols { grid-template-columns: 1fr; }
+    h1 { font-size: 2.25rem; }
+    main { padding: 3rem 1.5rem 4rem; }
+  }
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    transition: border-color 0.2s ease;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Task 1 / Product Scoping</div>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+    <svg id="iconLight" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/></svg>
+    <svg id="iconDark" viewBox="0 0 24 24" fill="currentColor" style="display:none"><rect x="4" y="4" width="16" height="16" rx="2"/></svg>
+  </button>
+</header>
+
+<main>
+  <h1>Marketing Performance Reporter</h1>
+  <p class="subtitle">An internal tool that automatically collects marketing data and delivers a daily briefing so analysts can focus on decisions instead of copying numbers.</p>
+
+  <section>
+    <h2>The Problem</h2>
+    <p>Every morning, analysts log into Meta Ads Manager, Google Ads, Google Analytics, Shopify, and other platforms to answer one question: how is our marketing performing, and where should we focus?</p>
+    <p>This routine creates three problems:</p>
+    <ul>
+      <li><strong>Inconsistency:</strong> different people pull data differently and get different answers.</li>
+      <li><strong>Lost time:</strong> it takes 30 to 60 minutes when it should take five.</li>
+      <li><strong>Key person risk:</strong> when the usual analyst is away, nobody knows how to get the report.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>The Solution</h2>
+    <p>The Marketing Performance Reporter is a simple internal pipeline that runs while you sleep.</p>
+    <p>At 6:00 AM UTC, it pulls data from all connected platforms. By 9:00 AM local time, it sends a clean daily briefing to Slack or email. The briefing includes:</p>
+    <ul>
+      <li>A 7-day comparison so you spot trends without day-of-week noise.</li>
+      <li>A breakdown of the top 3 channels by spend.</li>
+      <li>Trend indicators that show what is moving up or down.</li>
+      <li>A one-sentence summary of the biggest change.</li>
+      <li>Flags for anything that looks unusual.</li>
+      <li>A clear note on where the data came from.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>How It Works</h2>
+    <p>The system follows an ELT pattern: Extract, Load, Transform.</p>
+    <div class="card">
+      <p><strong>Ingestion:</strong> Python scripts call the Meta, Google Ads, Shopify, and GA4 APIs.</p>
+      <p><strong>Warehouse:</strong> Raw data lands in BigQuery, then moves through staging and mart tables.</p>
+      <p><strong>Transformation:</strong> SQL calculates standardized metrics like ROAS, CPA, CTR, and CVR.</p>
+      <p><strong>Delivery:</strong> A Jinja2 template formats the briefing, which is sent via Slack or email.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>The Data Model</h2>
+    <p>The core table is <code>marketing_metrics_daily</code>. It holds one row per client, per channel, per day, with normalized metrics ready for analysis.</p>
+    <p>Key design choices:</p>
+    <ul>
+      <li>Partitioned by date for fast queries.</li>
+      <li>Clustered by client and channel for easy filtering.</li>
+      <li>Raw tables keep original API responses for 90 days so you can audit anything.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>User Flows</h2>
+    <p>We mapped out how people actually use the tool.</p>
+    <div class="card">
+      <p><strong>Daily workflow:</strong> The analyst opens Slack, reads the briefing in 2 to 3 minutes, and decides whether to dig deeper. If something looks off, they click through to BigQuery to verify.</p>
+    </div>
+    <div class="card">
+      <p><strong>Verifying a metric:</strong> If a number looks strange, the analyst queries the raw table directly. No black boxes.</p>
+    </div>
+    <div class="card">
+      <p><strong>Onboarding a client:</strong> Adding a new client means editing a YAML file. No code changes, no engineering tickets.</p>
+    </div>
+    <div class="card">
+      <p><strong>Handling incomplete data:</strong> If an API is down, the briefing says so clearly. It never shows a zero and pretends everything is fine.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Scope</h2>
+    <div class="cols">
+      <div class="card">
+        <p><strong>In scope for v1</strong></p>
+        <ul>
+          <li>Daily automated briefings</li>
+          <li>Standardized metric definitions</li>
+          <li>Multi-tenancy from day one</li>
+          <li>Graceful handling of missing data</li>
+          <li>BigQuery access for verification</li>
+        </ul>
+      </div>
+      <div class="card">
+        <p><strong>Out of scope</strong></p>
+        <ul>
+          <li>Predictive modeling</li>
+          <li>Real-time streaming</li>
+          <li>Self-service report builder</li>
+          <li>Client-facing branded reports</li>
+          <li>Custom dashboard UI</li>
+        </ul>
+      </div>
+    </div>
+    <p>These exclusions are deliberate. We want to earn trust with clean, consistent data before adding complexity.</p>
+  </section>
+
+  <section>
+    <h2>Success Metrics</h2>
+    <p>We will know this works if:</p>
+    <ul>
+      <li>Analysts spend under 5 minutes on the briefing instead of 30 or more.</li>
+      <li>Every analyst gets the same numbers for the same time period.</li>
+      <li>80 percent of the team opens the briefing in the first month.</li>
+      <li>Analysts trust the numbers enough to use them in client meetings.</li>
+    </ul>
+  </section>
+</main>
+
+<script>
+  const toggle = document.getElementById('themeToggle');
+  const iconLight = document.getElementById('iconLight');
+  const iconDark = document.getElementById('iconDark');
+  const html = document.documentElement;
+
+  function updateIcons() {
+    if (html.classList.contains('dark')) {
+      iconLight.style.display = 'none';
+      iconDark.style.display = 'block';
+    } else {
+      iconLight.style.display = 'block';
+      iconDark.style.display = 'none';
+    }
+  }
+
+  toggle.addEventListener('click', () => {
+    html.classList.toggle('dark');
+    updateIcons();
+  });
+
+  // respect system preference on load
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    html.classList.add('dark');
+    updateIcons();
+  }
+</script>
+
+</body>
+</html>
